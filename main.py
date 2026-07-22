@@ -8,20 +8,11 @@ from dotenv import load_dotenv
 from langchain_openrouter import ChatOpenRouter
 
 
-DEFAULT_MODEL = "nvidia/nemotron-3-ultra-550b-a55b:free"
 EXIT_COMMANDS = {"salir", "exit", "quit"}
 MAX_HISTORY_TURNS = 10
 
 SYSTEM_PROMPT = """
-Eres un matemático experto.
 
-Identifica la intención del usuario y responde únicamente con una etiqueta:
-
-- SUMAR
-- RESTAR
-- OTRA
-
-No añadas explicaciones.
 """.strip()
 
 
@@ -72,7 +63,7 @@ def create_model() -> ChatOpenRouter:
     require_environment_variable("OPENROUTER_API_KEY")
 
     return ChatOpenRouter(
-        model=os.getenv("OPENROUTER_MODEL", DEFAULT_MODEL),
+        model="nvidia/nemotron-3-ultra-550b-a55b:free",
         temperature=0.5,
         max_retries=2,
     )
@@ -88,7 +79,7 @@ def main() -> None:
     ]
 
     print(
-        "Chatbot de clasificación matemática vía OpenRouter.\n"
+        "Mi primer Chatbot vía OpenRouter.\n"
         "Escribe 'salir' para terminar.\n"
     )
 
